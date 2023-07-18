@@ -29,6 +29,5 @@ jobs:
         ECR_REPOSITORY: kube-pilot
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        cd kube-pilot-app
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ../Dockerfile .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
