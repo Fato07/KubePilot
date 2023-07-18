@@ -2,11 +2,11 @@ FROM node:14
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY kube-pilot-app/package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY kube-pilot-app .
 
 EXPOSE 8080
-CMD [ "npm", "start" ]
+CMD [ "node", "server.js" ]
