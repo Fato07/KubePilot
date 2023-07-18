@@ -3,7 +3,7 @@ module "eks" {
   version = "~> 19.0"
   cluster_name    = "kubePilot-cluster"
   cluster_version = "1.27"
-  subnets         = ["subnet-0664059678e2e5d49", "subnet-0f040d4fc75678d58", "subnet-09166fd23123d4dcd"]
+  subnet_ids      = ["subnet-0664059678e2e5d49", "subnet-0f040d4fc75678d58", "subnet-09166fd23123d4dcd"]
   vpc_id          = "vpc-0583b57a0e4ed943e"
   
   node_groups = {
