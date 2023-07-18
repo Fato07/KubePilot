@@ -1,6 +1,18 @@
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
+variable "image_tag" {
+  description = "Image tag for the Docker image"
+}
+
+variable "commit_sha" {
+  description = "Commit SHA of the code"
+}
+
 resource "kubernetes_deployment" "kube-pilot-dev" {
   metadata {
-    name = "kube-pilot-app"
+    name      = "kube-pilot-app"
     namespace = kubernetes_namespace.kube-pilot-dev.metadata[0].name
   }
 
@@ -22,7 +34,7 @@ resource "kubernetes_deployment" "kube-pilot-dev" {
 
       spec {
         container {
-          image = "<AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/<ECR_REPOSITORY_NAME>:<IMAGE_TAG>"
+          image = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/kube-pilot:${var.image_tag}"
           name  = "kube-pilot-app"
 
           port {
@@ -36,7 +48,7 @@ resource "kubernetes_deployment" "kube-pilot-dev" {
 
           env {
             name  = "COMMIT_SHA"
-            value = "<COMMIT_SHA>"
+            value = var.commit_sha
           }
 
           readiness_probe {
