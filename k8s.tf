@@ -4,16 +4,18 @@ data "aws_region" "current" {}
 
 variable "image_tag" {
   description = "Image tag for the Docker image"
+  default     = "latest" # Set your preferred default value here
 }
 
 variable "commit_sha" {
   description = "Commit SHA of the code"
+  default     = "none"   # Set your preferred default value here
 }
 
 resource "kubernetes_deployment" "kube-pilot-dev" {
   metadata {
     name      = "kube-pilot-app"
-    namespace = kubernetes_namespace.kube-pilot-dev.metadata[0].name
+    namespace = kubernetes_deployment.kube-pilot-dev.metadata[0].name
   }
 
   spec {
