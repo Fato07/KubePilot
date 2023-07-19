@@ -18,5 +18,5 @@ provider "aws" {
 
 provider "kubernetes" {
   config_path    = "~/.kube/config"
-  config_context = "kube-pilot-context"
+  config_context = "docker-desktop"
 }
