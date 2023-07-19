@@ -15,7 +15,7 @@ variable "commit_sha" {
 resource "kubernetes_deployment" "kube-pilot-dev" {
   metadata {
     name      = "kube-pilot-app"
-    namespace = kubernetes_deployment.kube-pilot-dev.metadata[0].name
+    namespace = "kube-pilot-dev" # Specify the desired namespace directly
   }
 
   spec {
